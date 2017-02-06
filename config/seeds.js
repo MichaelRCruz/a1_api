@@ -3,110 +3,110 @@ var People = require('../models/people');
 
 var peoples = [
   { // 0
-    name: "Aaron Goldsmith",
-    phone: "(555) 555-5555",
-    email: "aaron@aaron.io",
-    employer: "undisclosed",
-    github: "github",
-    linkedin: "linkedin",
-    facebook: "facebook",
-    projects: []
-  },
-  { // 1
-    name: "Emily Main",
-    phone: "(555) 555-5555",
-    email: "emily@emily.io",
-    employer: "undisclosed",
-    github: "github",
-    linkedin: "linkedin",
-    facebook: "facebook",
-    projects: []
-  },
-  { // 2
-    name: "Gaye Lowenstein",
-    phone: "(555) 555-5555",
-    email: "gaye@gaye.io",
-    employer: "undisclosed",
-    github: "github",
-    linkedin: "linkedin",
-    facebook: "facebook",
-    projects: []
-  },
-  { // 3
     name: "Michael Cruz",
     phone: "(555) 555-5555",
-    email: "michael@michael.io",
-    employer: "undisclosed",
+    email: "person@people.com",
+    employer: "employer",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
+  },
+  { // 1
+    name: "Elon Musk",
+    phone: "(555) 555-5555",
+    email: "elon@tesla.com",
+    employer: "Tesla",
+    github: "github",
+    linkedin: "linkedin",
+    facebook: "facebook",
+    projects: {}
+  },
+  { // 2
+    name: "Tim Cook",
+    phone: "(555) 555-5555",
+    email: "tim@apple.com",
+    employer: "Apple",
+    github: "github",
+    linkedin: "linkedin",
+    facebook: "facebook",
+    projects: {}
+  },
+  { // 3
+    name: "Sundai Pichai",
+    phone: "(555) 555-5555",
+    email: "sundai@google.com",
+    employer: "Google",
+    github: "github",
+    linkedin: "linkedin",
+    facebook: "facebook",
+    projects: {}
   },
   { // 4
-    name: "Andrew Gonzalez",
+    name: "Larry Page",
     phone: "(555) 555-5555",
-    email: "andrew@andrew.io",
-    employer: "undisclosed",
+    email: "larry@alphabet.com",
+    employer: "Alphabet",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
   },
   { // 5
-    name: "Antonio Rhee",
+    name: "Mark Zuckerberg",
     phone: "(555) 555-5555",
-    email: "antonio@antonio.io",
-    employer: "undisclosed",
+    email: "mark@facebook.com",
+    employer: "Facebook",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
   },
   { // 6
-    name: "Darin Ma",
+    name: "Jeff Bezos",
     phone: "(555) 555-5555",
-    email: "darin@darin.io",
-    employer: "undisclosed",
+    email: "jeff@amazon.com",
+    employer: "Amazon",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
   },
   { // 7
-    name: "Kevin Salazar",
+    name: "Satya Nadella",
     phone: "(555) 555-5555",
-    email: "kevin@kevin.io",
-    employer: "undisclosed",
+    email: "satya@microsoft.com",
+    employer: "Microsoft",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
   },
   { // 8
-    name: "Paul Baik",
+    name: "Marissa Mayer",
     phone: "(555) 555-5555",
-    email: "paul@paul.io",
-    employer: "undisclosed",
+    email: "marissa@yahoo.com",
+    employer: "Yahoo",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
   },
   { // 9
-    name: "Viviana Rishe",
+    name: "Susan Wojcicki",
     phone: "(555) 555-5555",
-    email: "vivi@vivi.io",
-    employer: "undisclosed",
+    email: "susan@youtube.com",
+    employer: "YouTube",
     github: "github",
     linkedin: "linkedin",
     facebook: "facebook",
-    projects: []
+    projects: {}
   }
 ];
 
 People.remove({}, function(err) {
   if (err) console.log(err);
-  People.create(cupcakes, function(err, peoples) {
+  People.create(peoples, function(err, peoples) {
     if (err) {
       console.log(err);
     } else {
