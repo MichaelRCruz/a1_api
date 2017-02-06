@@ -11,6 +11,6 @@ var peopleSchema = new mongoose.Schema({
   projects: Object
 });
 
-var Cupcake = mongoose.model('People', peopleSchema);
+var People = mongoose.model('People', peopleSchema);
 
 module.exports = People;
