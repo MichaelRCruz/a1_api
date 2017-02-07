@@ -1,4 +1,4 @@
-var Cupcake = require('../models/people');
+var People = require('../models/people');
 
 module.exports = {
   index: index,
