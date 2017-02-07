@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // require controllers
-var api_peoplesController = require('../controllers/api_peoples');
+var api_peoples = require('../controllers/api_peoples');
 
 router.route('/api/peoples')
   .get(api_peoples.index)

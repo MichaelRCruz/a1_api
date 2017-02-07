@@ -8,6 +8,7 @@ module.exports = {
 }
 
 function index(req, res, next) {
+  console.log('sup, dawg')
   People.find({}, function(err, peoples) {
     if (err) res.send(err);
     res.json(peoples);
