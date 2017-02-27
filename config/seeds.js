@@ -1,7 +1,7 @@
 var mongoose = require('./database');
-var People = require('../models/people');
+var User = require('../models/user');
 
-var peoples = [
+var users = [
   { // 0
     name: "Michael Cruz",
     phone: "(555) 555-5555",
@@ -104,13 +104,13 @@ var peoples = [
   }
 ];
 
-People.remove({}, function(err) {
+User.remove({}, function(err) {
   if (err) console.log(err);
-  People.create(peoples, function(err, peoples) {
+  User.create(users, function(err, users) {
     if (err) {
       console.log(err);
     } else {
-      console.log("Database seeded with " + peoples.length  + " peoples.");
+      console.log("Database seeded with " + users.length  + " users.");
       mongoose.disconnect();
       process.exit(0);
     }

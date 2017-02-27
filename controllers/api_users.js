@@ -1,4 +1,4 @@
-var People = require('../models/people');
+var User = require('../models/user');
 
 module.exports = {
   index: index,
@@ -9,14 +9,14 @@ module.exports = {
 
 function index(req, res, next) {
   console.log('sup, dawg')
-  People.find({}, function(err, peoples) {
+  User.find({}, function(err, users) {
     if (err) res.send(err);
-    res.json(peoples);
+    res.json(users);
   });
 };
 
 function create(req, res, next) {
-  var newPeople = {
+  var newUser = {
     name: req.body.name,
     phone: req.body.phone,
     email: req.body.email,
@@ -26,21 +26,21 @@ function create(req, res, next) {
     facebook: req.body.facebook,
     projects: req.body.projects
   }
-  console.log(newPeople);
-  People.create(newPeople, function(err, people) {
+  console.log(newUser);
+  User.create(newUser, function(err, user) {
     if (err) res.send(err);
-    res.json(people);
+    res.json(user);
   })
 };
 
 function destroy(req, res, next) {
   var id = { "_id": req.body.id }
   console.log(req.user._id);
-  People.findOne(id, function(err, people) {
-    console.log(people);
+  User.findOne(id, function(err, user) {
+    console.log(user);
     if (err) throw err
-    else if (req.user._id.toString() == people.createdBy) {
-      people.remove(function(err) {
+    else if (req.user._id.toString() == user.createdBy) {
+      user.remove(function(err) {
         if (err) console.log('delete failed -> ', err);
         res.send(204);
       })
