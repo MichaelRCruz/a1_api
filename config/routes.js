@@ -14,7 +14,7 @@ var api_users = require('../controllers/api_users');
 // router.route('/')
 //   .get(welcomeController.welcome)
 
-router.route('/api/users')
+router.route('/users')
   .get(api_users.index)
   .post(api_users.create)
   .delete(api_users.destroy)

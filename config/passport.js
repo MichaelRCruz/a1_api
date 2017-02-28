@@ -7,23 +7,28 @@ passport.use(new GithubStrategy({
   clientSecret: process.env.GITHUB_SECRET,
   callbackURL: 'http://localhost:3000/oauth2callback'
   }, function(accessToken, refreshToken, profile, cb){
-    console.log( profile );
-    User.findOne({ 'githubId': profile.id }, function(err, user) {
+    User.findOne({ 'github_id': profile.id.toString() }, function(err, user) {
+      // console.log('hi');
       if (err) return cb(err);
       if (user) {
         return cb(null, user);
+
+
       } else {
         // we have a new user via oAuth!
+        console.log( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~", profile );
         var newUser = new User({
-          name: profile.name,
-          avatarUrl: profile.avatar_url,
-          htmlUrl: profile.htmlUrl,
-          githubId: profile.id.toString()
+          name: profile.displayName,
+          github_user_name: profile.username,
+          github_profile_url: profile.profileUrl,
+          github_avatar_url: profile._json.avatar_url,
+          github_id: profile.id.toString()
         });
         newUser.save(function(err) {
           if (err) return cb(err);
           return cb(null, newUser);
         });
+        console.log( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~", newUser );
       }
     });
   }
