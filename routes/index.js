@@ -19,4 +19,13 @@ router.get('/oauth2callback', passport.authenticate(
   }
 ));
 
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+router.get('/', function(req, res) {
+  res.render('index', { user: req.user})
+});
+
 module.exports = router;
