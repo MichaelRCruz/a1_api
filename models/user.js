@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema({
   github: String,
   linkedin: String,
   facebook: String,
-  projects: Object
+  githubId: String,
+  created: { type: Date, default: Date.now }
 });
 
 var User = mongoose.model('User', userSchema);

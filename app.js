@@ -13,7 +13,9 @@ var session = require('express-session');
 
 var app = express();
 
+require('dotenv').config()
 require('./config/database');
+require('./config/passport');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
