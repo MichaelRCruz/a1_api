@@ -25,3 +25,13 @@ passport.use(new GithubStrategy({
     });
   }
 ));
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (user, done) {
+  User.findById(id, function(err, user) {
+    done(err, user)
+  });
+});
