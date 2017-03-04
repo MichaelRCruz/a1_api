@@ -1,14 +1,16 @@
 var passport = require('passport');
 var GithubStrategy = require('passport-github').Strategy;
-var User = require('../models/user')
+var User = require('../models/user');
+var dotenv = require('dotenv');
+
+dotenv.load();
 
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_SECRET,
   callbackURL: 'http://localhost:3000/oauth2callback'
-  }, function(accessToken, refreshToken, profile, cb){
+}, function(accessToken, refreshToken, profile, cb){
     User.findOne({ 'github_id': profile.id.toString() }, function(err, user) {
-      // console.log('hi');
       if (err) return cb(err);
       if (user) {
         return cb(null, user);
@@ -17,6 +19,7 @@ passport.use(new GithubStrategy({
       } else {
         // we have a new user via oAuth!
         console.log( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~", profile );
+
         var newUser = new User({
           name: profile.displayName,
           github_user_name: profile.username,
