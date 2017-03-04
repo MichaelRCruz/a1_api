@@ -54,6 +54,11 @@ app.get('/oauth2callback', passport.authenticate(
   }
 ));
 
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('http://localhost:8080/');
+})
+
 // app.use(cors());
 app.use('/', index);
 app.use('/api', apiIndex);
