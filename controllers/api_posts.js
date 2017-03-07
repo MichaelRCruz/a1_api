@@ -10,17 +10,21 @@ module.exports = {
 function index(req, res, next) {
   console.log('SSSSSSS');
   console.log(req.user);
-  Post.find({}, function(err, posts) {
-    if (err) res.send(err);
-    res.json(posts);
-  });
+  if (req.user) {
+    Post.find({ created_by: req.user._id }, function(err, posts) {
+      if (err) res.send(err);
+      res.json(posts);
+    });
+  } else {
+    res.send(403);
+  }
 };
 
 function create(req, res, next) {
   var newPost = {
     title: req.body.title,
     content: req.body.content,
-    createdBy: req.user._id
+    created_by: req.user._id
   }
   console.log(newPost);
   console.log(req.user);
