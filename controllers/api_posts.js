@@ -17,7 +17,8 @@ function index(req, res, next) {
 function create(req, res, next) {
   var newPost = {
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    createdBy: req.user._id
   }
   console.log(newPost);
   Post.create(newPost, function(err, post) {

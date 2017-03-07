@@ -18,8 +18,6 @@ passport.use(new GithubStrategy({
 
       } else {
         // we have a new user via oAuth!
-        console.log( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~", profile );
-
         var newUser = new User({
           name: profile.displayName,
           github_user_name: profile.username,
@@ -31,7 +29,6 @@ passport.use(new GithubStrategy({
           if (err) return cb(err);
           return cb(null, newUser);
         });
-        console.log( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~", newUser );
       }
     });
   }
@@ -39,11 +36,13 @@ passport.use(new GithubStrategy({
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
+  console.log('SSSSSSS', user.id);
 });
 
 passport.deserializeUser(function (id, done) {
   User.findById(id, function(err, user) {
     done(err, user)
+    console.log('DDDDDDD', user.id);
   });
 });
 
