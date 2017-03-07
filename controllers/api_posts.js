@@ -8,6 +8,8 @@ module.exports = {
 }
 
 function index(req, res, next) {
+  console.log('SSSSSSS');
+  console.log(req.user);
   Post.find({}, function(err, posts) {
     if (err) res.send(err);
     res.json(posts);
@@ -21,6 +23,7 @@ function create(req, res, next) {
     createdBy: req.user._id
   }
   console.log(newPost);
+  console.log(req.user);
   Post.create(newPost, function(err, post) {
     if (err) res.send(err);
     res.json(post);
