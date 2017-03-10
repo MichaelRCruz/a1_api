@@ -9,7 +9,7 @@ var posts = [
   { // 0
       title: "Hello, universe.",
       content: "check it out again"
-  },
+  }
 ];
 
 Post.remove({}, function(err) {

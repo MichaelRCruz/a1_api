@@ -8,7 +8,6 @@ module.exports = {
 }
 
 function index(req, res, next) {
-  console.log('SSSSSSS');
   console.log(req.user);
   if (req.user) {
     Post.find({ created_by: req.user._id }, function(err, posts) {
@@ -26,8 +25,6 @@ function create(req, res, next) {
     content: req.body.content,
     created_by: req.user._id
   }
-  console.log(newPost);
-  console.log(req.user);
   Post.create(newPost, function(err, post) {
     if (err) res.send(err);
     res.json(post);
@@ -35,18 +32,39 @@ function create(req, res, next) {
 };
 
 function destroy(req, res, next) {
-  var id = { "_id": req.body.id }
-  console.log(req.user._id);
-  User.findOne(id, function(err, user) {
-    console.log(user);
-    if (err) throw err
-    else if (req.user._id.toString() == user.createdBy) {
-      user.remove(function(err) {
-        if (err) console.log('delete failed -> ', err);
-        res.send(204);
-      })
-    } else {
-      res.send(401);
-    }
-  })
-};
+  var id = { "_id": req.body._id }
+  if (req.body._id) {
+    Post.findOne(id, function(err, post) {
+      if (err) {
+        throw err
+      } else {
+        post.remove(function(err) {
+          if (err) {
+            console.log('delete failed ->', err);
+            res.send(204);
+          } else {
+            res.send(200);
+          }
+        })
+      }
+    })
+  } else {
+    // missing required post id
+    res.send(400);
+  }
+}
+
+// function edit(req, res, next) {
+//   var id = { "_id": req.body.id }
+//   Listing.findOne(id, function(err, listing) {
+//     if (err) throw err
+//     else if (req.user._id.toString() == listing.createdBy) {
+//       Listing.findOneAndUpdate({_id: req.body.id}, req.body, function(err) {
+//         if (err) console.log('update failed -> ', err);
+//         res.send(204);
+//       })
+//     } else {
+//       res.send(401);
+//     }
+//   })
+// };

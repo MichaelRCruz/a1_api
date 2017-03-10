@@ -8,7 +8,6 @@ module.exports = {
 }
 
 function index(req, res, next) {
-  console.log('sup, dawg')
   User.find({}, function(err, users) {
     if (err) res.send(err);
     res.json(users);
@@ -49,18 +48,3 @@ function destroy(req, res, next) {
     }
   })
 };
-//
-// function edit(req, res, next) {
-//   var id = { "_id": req.body.id }
-//   People.findOne(id, function(err, people) {
-//     if (err) throw err
-//     else if (req.user._id.toString() == people.createdBy) {
-//       People.findOneAndUpdate({_id: req.body.id}, req.body, function(err) {
-//         if (err) console.log('update failed -> ', err);
-//         res.send(204);
-//       })
-//     } else {
-//       res.send(401);
-//     }
-//   })
-// };
