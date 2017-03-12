@@ -4,8 +4,23 @@ module.exports = {
   index: index,
   create: create,
   destroy: destroy,
+  show: show,
   // edit: edit
 }
+
+function show(req, res, next) {
+  if (req.user._id) {
+    User.findOne({ "_id": req.params.id }, function(err, user) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(user);
+      }
+    });
+  } else {
+    res.send(403);
+  }
+};
 
 function index(req, res, next) {
   User.find({}, function(err, users) {
@@ -25,7 +40,6 @@ function create(req, res, next) {
     facebook: req.body.facebook,
     projects: req.body.projects
   }
-  console.log(newUser);
   User.create(newUser, function(err, user) {
     if (err) res.send(err);
     res.json(user);
@@ -34,9 +48,7 @@ function create(req, res, next) {
 
 function destroy(req, res, next) {
   var id = { "_id": req.body.id }
-  console.log(req.user._id);
   User.findOne(id, function(err, user) {
-    console.log(user);
     if (err) throw err
     else if (req.user._id.toString() == user.createdBy) {
       user.remove(function(err) {
