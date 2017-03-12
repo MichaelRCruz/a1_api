@@ -17,5 +17,7 @@ router.route('/posts')
   .delete(api_posts.destroy)
 router.route('/login')
   .get(api_login.index)
+router.route('/posts/:id')
+  .get(api_posts.show)
 
 module.exports = router;

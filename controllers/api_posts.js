@@ -4,8 +4,25 @@ module.exports = {
   index: index,
   create: create,
   destroy: destroy,
+  show: show
   // edit: edit
 }
+
+function show(req, res, next) {
+  console.log('sip', req.params);
+  if (req.user._id) {
+    Post.findOne({ "_id": req.params.id }, function(err, post) {
+      console.log('sipppppppppppppp', err, post);
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(post);
+      }
+    });
+  } else {
+    res.send(403);
+  }
+};
 
 function index(req, res, next) {
   console.log(req.user);
