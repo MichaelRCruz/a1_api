@@ -1,4 +1,5 @@
 var Comment = require('../models/comment');
+var User = require('../models/user');
 
 module.exports = {
   index: index,
@@ -8,24 +9,12 @@ module.exports = {
   // edit: edit
 }
 
-// function show(req, res, next) {
-//   if (req.user._id) {
-//     Post.findOne({ "_id": req.params.id }, function(err, post) {
-//       if (err) {
-//         res.send(err);
-//       } else {
-//         res.json(post);
-//       }
-//     });
-//   } else {
-//     res.send(403);
-//   }
-// };
-
 function show(req, res, next) {
   if (req.user) {
-    Comment.find({ "belongs_to": req.params.id }, function(err, comments) {
-      if (err) res.send(err);
+    Comment.find({ "belongs_to": req.params.id })
+    .populate('created_by')
+    .exec(function(err, comments) {
+      if (err) console.log(err);
       res.json(comments);
     });
   } else {
