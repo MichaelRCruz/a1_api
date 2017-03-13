@@ -10,9 +10,7 @@ module.exports = {
 }
 
 function profileShow(req, res, next) {
-  console.log('ASDFASDASDF')
   if (req.user) {
-    console.log('ASDFASDASDF', req.user._id)
     User.findOne({ "_id": req.user._id }, function(err, user) {
       if (err) {
         res.send(err);

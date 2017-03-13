@@ -19,9 +19,9 @@ router.route('/login')
   .get(api_login.index)
 router.route('/posts/:id')
   .get(api_posts.show)
-router.route('/users/:id')
-  .get(api_users.show)
 router.route('/users/profileShow')
   .get(api_users.profileShow)
+router.route('/users/:id')
+  .get(api_users.show)
 
 module.exports = router;
