@@ -11,9 +11,9 @@ module.exports = {
 
 function profileShow(req, res, next) {
   console.log('ASDFASDASDF')
-  if (req.user._id) {
+  if (req.user) {
     console.log('ASDFASDASDF', req.user._id)
-    User.findById({ "_id": req.user.id.toString() }, function(err, user) {
+    User.findOne({ "_id": req.user._id }, function(err, user) {
       if (err) {
         res.send(err);
       } else {
