@@ -10,13 +10,12 @@ module.exports = {
 
 function show(req, res, next) {
   if (req.user._id) {
-    Post.findOne({ "_id": req.params.id }, function(err, post) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.json(post);
-      }
-    });
+    Post.findOne({ "_id": req.params.id })
+    .populate('created_by')
+    .exec(function(err, post) {
+      if (err) console.log(err);
+      res.json(post);
+    })
   } else {
     res.send(403);
   }
