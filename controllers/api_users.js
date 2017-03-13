@@ -6,21 +6,8 @@ module.exports = {
   destroy: destroy,
   show: show,
   profileShow: profileShow,
-  indexPost: indexPost
   // edit: edit
 }
-
-function indexPost(req, res, next) {
-  console.log('we are hitting the controller~~~~~~~~~~~~')
-  if (req.user) {
-    User.findOne({ "_id": req.body._id }, function(err, user) {
-      if (err) res.send(err);
-      res.json(user);
-    });
-  } else {
-    res.send(403);
-  }
-};
 
 function profileShow(req, res, next) {
   if (req.user) {
