@@ -5,8 +5,25 @@ module.exports = {
   create: create,
   destroy: destroy,
   show: show,
+  profileShow: profileShow
   // edit: edit
 }
+
+function profileShow(req, res, next) {
+  console.log('ASDFASDASDF')
+  if (req.user._id) {
+    console.log('ASDFASDASDF', req.user._id)
+    User.findById({ "_id": req.user.id.toString() }, function(err, user) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(user);
+      }
+    });
+  } else {
+    res.send(403);
+  }
+};
 
 function show(req, res, next) {
   if (req.user._id) {

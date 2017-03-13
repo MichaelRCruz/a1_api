@@ -21,5 +21,7 @@ router.route('/posts/:id')
   .get(api_posts.show)
 router.route('/users/:id')
   .get(api_users.show)
+router.route('/users/profileShow')
+  .get(api_users.profileShow)
 
 module.exports = router;
