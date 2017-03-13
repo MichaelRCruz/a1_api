@@ -24,9 +24,9 @@ function show(req, res, next) {
 
 function index(req, res, next) {
   if (req.user) {
-    Post.find({ created_by: req.user._id }, function(err, posts) {
+    Comment.find({ created_by: req.user._id }, function(err, comments) {
       if (err) res.send(err);
-      res.json(posts);
+      res.json(comments);
     });
   } else {
     res.send(403);
@@ -34,12 +34,12 @@ function index(req, res, next) {
 };
 
 function create(req, res, next) {
-  var newPost = {
-    title: req.body.title,
+  var newComment = {
     content: req.body.content,
-    created_by: req.user._id
+    created_by: req.user._id,
+    belongs_to: req.body.belongs_to
   }
-  Post.create(newPost, function(err, post) {
+  Comment.create(newComment, function(err, post) {
     if (err) res.send(err);
     res.json(post);
   })
@@ -68,17 +68,17 @@ function destroy(req, res, next) {
   }
 }
 
-// function edit(req, res, next) {
-//   var id = { "_id": req.body.id }
-//   Listing.findOne(id, function(err, listing) {
-//     if (err) throw err
-//     else if (req.user._id.toString() == listing.createdBy) {
-//       Listing.findOneAndUpdate({_id: req.body.id}, req.body, function(err) {
-//         if (err) console.log('update failed -> ', err);
-//         res.send(204);
-//       })
-//     } else {
-//       res.send(401);
-//     }
-//   })
-// };
+function edit(req, res, next) {
+  var id = { "_id": req.body.id }
+  Listing.findOne(id, function(err, listing) {
+    if (err) throw err
+    else if (req.user._id.toString() == listing.createdBy) {
+      Listing.findOneAndUpdate({_id: req.body.id}, req.body, function(err) {
+        if (err) console.log('update failed -> ', err);
+        res.send(204);
+      })
+    } else {
+      res.send(401);
+    }
+  })
+};
