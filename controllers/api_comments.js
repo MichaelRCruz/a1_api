@@ -22,9 +22,20 @@ function show(req, res, next) {
   }
 };
 
+function show(req, res, next) {
+  if (req.user) {
+    Comment.find({ "belongs_to": req.params.id }, function(err, comments) {
+      if (err) res.send(err);
+      res.json(comments);
+    });
+  } else {
+    res.send(403);
+  }
+};
+
 function index(req, res, next) {
   if (req.user) {
-    Comment.find({ created_by: req.user._id }, function(err, comments) {
+    Comment.find({}, function(err, comments) {
       if (err) res.send(err);
       res.json(comments);
     });
