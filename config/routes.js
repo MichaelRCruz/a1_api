@@ -8,10 +8,6 @@ var api_login = require('../controllers/api_login');
 var api_comments = require('../controllers/api_comments');
 
 // define routes
-router.route('/users')
-  .get(api_users.index)
-  .post(api_users.create)
-  .delete(api_users.destroy)
 router.route('/posts')
   .get(api_posts.index)
   .post(api_posts.create)
@@ -26,6 +22,12 @@ router.route('/login')
   .get(api_login.index)
 router.route('/posts/:id')
   .get(api_posts.show)
+router.route('/users')
+  .get(api_users.index)
+  .post(api_users.create)
+  .delete(api_users.destroy)
+router.route('/users/indexPost')
+  .get(api_users.indexPost)
 router.route('/users/profileShow')
   .get(api_users.profileShow)
 router.route('/users/:id')

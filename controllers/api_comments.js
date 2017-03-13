@@ -8,19 +8,19 @@ module.exports = {
   // edit: edit
 }
 
-function show(req, res, next) {
-  if (req.user._id) {
-    Post.findOne({ "_id": req.params.id }, function(err, post) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.json(post);
-      }
-    });
-  } else {
-    res.send(403);
-  }
-};
+// function show(req, res, next) {
+//   if (req.user._id) {
+//     Post.findOne({ "_id": req.params.id }, function(err, post) {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.json(post);
+//       }
+//     });
+//   } else {
+//     res.send(403);
+//   }
+// };
 
 function show(req, res, next) {
   if (req.user) {
