@@ -5,9 +5,8 @@ module.exports = {
   create: create,
   destroy: destroy,
   show: show,
-  profileShow: profileShow,
-  // edit: edit
-}
+  profileShow: profileShow
+};
 
 function profileShow(req, res, next) {
   if (req.user) {

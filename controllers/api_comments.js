@@ -6,8 +6,7 @@ module.exports = {
   create: create,
   destroy: destroy,
   show: show
-  // edit: edit
-}
+};
 
 function show(req, res, next) {
   if (req.user) {
@@ -48,9 +47,7 @@ function create(req, res, next) {
       res.json(comments[0]);
     });
   })
-
 };
-
 
 function destroy(req, res, next) {
   var id = { "_id": req.body._id }
@@ -73,7 +70,7 @@ function destroy(req, res, next) {
     // missing required post id
     res.send(400);
   }
-}
+};
 
 function edit(req, res, next) {
   var id = { "_id": req.body.id }
