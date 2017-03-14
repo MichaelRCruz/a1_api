@@ -48,11 +48,11 @@ function create(req, res, next) {
 function destroy(req, res, next) {
   var id = { "_id": req.body._id }
   if (req.body._id) {
-    Post.findOne(id, function(err, post) {
+    Comment.findOne(id, function(err, comment) {
       if (err) {
         throw err
       } else {
-        post.remove(function(err) {
+        comment.remove(function(err) {
           if (err) {
             console.log('delete failed ->', err);
             res.send(204);
