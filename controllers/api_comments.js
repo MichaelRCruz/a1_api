@@ -39,11 +39,18 @@ function create(req, res, next) {
     created_by: req.user._id,
     belongs_to: req.body.belongs_to
   }
-  Comment.create(newComment, function(err, post) {
+  Comment.create(newComment, function(err, comment) {
     if (err) res.send(err);
-    res.json(post);
+    Comment.find({ "_id": comment._id })
+    .populate('created_by')
+    .exec(function(err, comments) {
+      if (err) console.log(err);
+      res.json(comments[0]);
+    });
   })
+
 };
+
 
 function destroy(req, res, next) {
   var id = { "_id": req.body._id }
