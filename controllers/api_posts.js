@@ -1,4 +1,5 @@
 var Post = require('../models/post');
+var User = require('../models/user');
 
 module.exports = {
   index: index,
@@ -22,24 +23,31 @@ function show(req, res, next) {
 
 function index(req, res, next) {
   if (req.user) {
-    Post.find({ created_by: req.user._id }, function(err, posts) {
-      if (err) res.send(err);
-      res.json(posts);
-    });
+    Post.find({})
+    .populate('created_by')
+    .exec(function(err, posts) {
+      if (err) console.log(err)
+      res.json(posts)
+    })
   } else {
     res.send(403);
   }
 };
 
 function create(req, res, next) {
-  var newPost = {
+  let newPost = {
     title: req.body.title,
     content: req.body.content,
     created_by: req.user._id
   }
   Post.create(newPost, function(err, post) {
-    if (err) res.send(err);
-    res.json(post);
+    if (err) console.log(err);
+    Post.findOne({ "_id": post._id })
+    .populate('created_by')
+    .exec(function(err, post) {
+      if (err) console.log(err);
+      res.json(post);
+    });
   })
 };
 

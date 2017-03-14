@@ -40,11 +40,11 @@ function create(req, res, next) {
   }
   Comment.create(newComment, function(err, comment) {
     if (err) res.send(err);
-    Comment.find({ "_id": comment._id })
+    Comment.findOne({ "_id": comment._id })
     .populate('created_by')
-    .exec(function(err, comments) {
+    .exec(function(err, comment) {
       if (err) console.log(err);
-      res.json(comments[0]);
+      res.json(comment);
     });
   })
 };

@@ -14,14 +14,17 @@ router.route('/posts')
   .delete(api_posts.destroy)
 router.route('/posts/:id')
   .get(api_posts.show)
+
 router.route('/comments/:id')
   .get(api_comments.show)
 router.route('/comments')
   .get(api_comments.index)
   .post(api_comments.create)
   .delete(api_comments.destroy)
+
 router.route('/session')
   .get(api_session.session)
+  
 router.route('/users')
   .get(api_users.index)
   .post(api_users.create)
