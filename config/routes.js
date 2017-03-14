@@ -4,7 +4,7 @@ var router = express.Router();
 // require controllers
 var api_users = require('../controllers/api_users');
 var api_posts = require('../controllers/api_posts');
-var api_login = require('../controllers/api_login');
+var api_session = require('../controllers/api_session');
 var api_comments = require('../controllers/api_comments');
 
 // define routes
@@ -20,8 +20,8 @@ router.route('/comments')
   .get(api_comments.index)
   .post(api_comments.create)
   .delete(api_comments.destroy)
-router.route('/login')
-  .get(api_login.index)
+router.route('/session')
+  .get(api_session.session)
 router.route('/users')
   .get(api_users.index)
   .post(api_users.create)
