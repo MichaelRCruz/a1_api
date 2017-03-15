@@ -14,6 +14,7 @@ router.route('/posts')
   .delete(api_posts.destroy)
 router.route('/posts/:id')
   .get(api_posts.show)
+  .get(api_posts.topicShow)
 
 router.route('/comments/:id')
   .get(api_comments.show)
