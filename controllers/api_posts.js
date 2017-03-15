@@ -38,7 +38,8 @@ function create(req, res, next) {
   let newPost = {
     title: req.body.title,
     content: req.body.content,
-    created_by: req.user._id
+    created_by: req.user._id,
+    topic: req.body.topic
   }
   Post.create(newPost, function(err, post) {
     if (err) console.log(err);
