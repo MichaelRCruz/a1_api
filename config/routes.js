@@ -24,7 +24,7 @@ router.route('/comments')
 
 router.route('/session')
   .get(api_session.session)
-  
+
 router.route('/users')
   .get(api_users.index)
   .post(api_users.create)

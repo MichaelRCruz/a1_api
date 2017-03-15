@@ -22,12 +22,14 @@ function show(req, res, next) {
 };
 
 function index(req, res, next) {
+  console.log('req.body ~~~~~~~~~~~~~~~~~~~~~~~~>', req.body)
   if (req.user) {
-    Post.find({})
+    Post.find({"topic": req.body.topic})
     .populate('created_by')
     .exec(function(err, posts) {
       if (err) console.log(err)
       res.json(posts)
+      console.log('req.body ~~~~~~~~~~~~~~~~~~~~~~~~>', posts)
     })
   } else {
     res.send(403);
