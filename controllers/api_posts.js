@@ -6,7 +6,7 @@ module.exports = {
   create: create,
   destroy: destroy,
   show: show,
-  topicShow: topicShow
+  listByTopic: listByTopic
 };
 
 function show(req, res, next) {
@@ -23,7 +23,6 @@ function show(req, res, next) {
 };
 
 function index(req, res, next) {
-  console.log('req.body ~~~~~~~~~~~~~~~~~~~~~~~~>', req.body)
   if (req.user) {
     // Post.find({"topic": req.body.topic})
     Post.find({})
@@ -31,22 +30,22 @@ function index(req, res, next) {
     .exec(function(err, posts) {
       if (err) console.log(err)
       res.json(posts)
-      console.log('req.body ~~~~~~~~~~~~~~~~~~~~~~~~>', posts)
     })
   } else {
     res.send(403);
   }
 };
 
-function topicShow(req, res, next) {
-  console.log('req.params.id ~~~~~~~~~~~~~~~~~~~~~~~~>', req.params.id)
+function listByTopic(req, res, next) {
+  console.log('req.params.topic ~~~~~~~~~~~~~~~~~~~~~~~~>', req.params.topic)
   if (req.user) {
-    Post.find({"topic": req.params.id})
+    // Post.find({"topic": req.body.topic})
+    Post.find({ "topic": req.params.topic })
     .populate('created_by')
     .exec(function(err, posts) {
       if (err) console.log(err)
       res.json(posts)
-      console.log('posts ~~~~~~~~~~~~~~~~~~~~~~~~>', posts)
+      console.log('listByTopic ~~~~~~~~~~~~~~~~~~~~~~~~>', posts)
     })
   } else {
     res.send(403);

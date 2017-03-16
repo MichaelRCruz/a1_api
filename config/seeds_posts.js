@@ -2,14 +2,7 @@ var mongoose = require('./database');
 var Post = require('../models/post');
 
 var posts = [
-  { // 0
-       title: "Hello, world.",
-       content: "check it out"
-  },
-  { // 0
-      title: "Hello, universe.",
-      content: "check it out again"
-  }
+  
 ];
 
 Post.remove({}, function(err) {
