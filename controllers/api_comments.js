@@ -50,7 +50,6 @@ function create(req, res, next) {
 };
 
 function destroy(req, res, next) {
-  console.log('it deleted~~~~~~~~~~~~~~~~~~~~~~~~~>', req.body)
   var id = { "_id": req.body._id }
   if (req.body._id) {
     Comment.findOne(id, function(err, comment) {

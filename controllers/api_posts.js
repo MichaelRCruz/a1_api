@@ -24,7 +24,6 @@ function show(req, res, next) {
 
 function index(req, res, next) {
   if (req.user) {
-    // Post.find({"topic": req.body.topic})
     Post.find({})
     .populate('created_by')
     .exec(function(err, posts) {
@@ -37,15 +36,12 @@ function index(req, res, next) {
 };
 
 function listByTopic(req, res, next) {
-  console.log('req.params.topic ~~~~~~~~~~~~~~~~~~~~~~~~>', req.params.topic)
   if (req.user) {
-    // Post.find({"topic": req.body.topic})
     Post.find({ "topic": req.params.topic })
     .populate('created_by')
     .exec(function(err, posts) {
       if (err) console.log(err)
       res.json(posts)
-      console.log('listByTopic ~~~~~~~~~~~~~~~~~~~~~~~~>', posts)
     })
   } else {
     res.send(403);
