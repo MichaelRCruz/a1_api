@@ -62,7 +62,7 @@ app.get('/auth/github', passport.authenticate(
 app.get('/oauth2callback', passport.authenticate(
   'github',
   {
-    successRedirect: 'http://localhost:8080/home',
+    successRedirect: 'http://localhost:8080/form',
     failureRedirect: '/'
   }
 ));
