@@ -64,10 +64,8 @@ function create(req, res, next) {
         if (err) console.log(err);
         res.json(comment);
       });
-      console.log('regular comment JKJKJKJKJKJKJK', comment)
     })
   } else {
-    console.log('req.body XOXOXOXOXOXOXOXOXOXOXOXOXO', req.body);
       var newComment = {
         content: req.body.content,
         belongs_to: req.body.belongs_to,
@@ -75,7 +73,6 @@ function create(req, res, next) {
         created_by: req.user._id,
         replied_to: req.body.replied_to
       }
-      console.log('newComment XOXOXOXOXOXOXOXOXOXOXOXOXO', newComment);
       Comment.create(newComment, function(err, comment) {
         if (err) res.send(err);
         Comment.findOne({ "_id": comment._id })
@@ -85,7 +82,6 @@ function create(req, res, next) {
           if (err) console.log(err);
           res.json(comment);
         });
-        console.log('cross your fingers OPOPOPOPOPOPOPOPOPOPOP', comment)
       })
     };
 };
