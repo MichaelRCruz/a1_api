@@ -10,7 +10,7 @@ module.exports = {
 
 function show(req, res, next) {
   if (req.user) {
-    Comment.find({ "belongs_to": req.params.id })
+    Comment.find({ "belongs_to": req.params.id, "replied_to": null })
     .populate('created_by')
     .exec(function(err, comments) {
       if (err) console.log(err);
@@ -33,7 +33,7 @@ function index(req, res, next) {
 };
 
 function create(req, res, next) {
-  if (req.body.belongs_to != "") {
+  if (req.body.replied_to == null) {
     var newComment = {
       content: req.body.content,
       belongs_to: req.body.belongs_to,
@@ -54,7 +54,7 @@ function create(req, res, next) {
     console.log('req.body XOXOXOXOXOXOXOXOXOXOXOXOXO', req.body);
       var newComment = {
         content: req.body.content,
-        belongs_to: "",
+        belongs_to: req.body.belongs_to,
         created_by: req.user._id,
         replied_to: req.body.replied_to
       }
@@ -62,6 +62,7 @@ function create(req, res, next) {
       Comment.create(newComment, function(err, comment) {
         if (err) res.send(err);
         Comment.findOne({ "_id": comment._id })
+        .populate('created_by')
         .populate('replied_to')
         .exec(function(err, comment) {
           if (err) console.log(err);
