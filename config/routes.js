@@ -21,6 +21,8 @@ router.route('/comments')
   .get(api_comments.index)
   .post(api_comments.create)
   .delete(api_comments.destroy)
+router.route('/comments/replies/:id')
+  .get(api_comments.listReplies)
 router.route('/comments/:id')
   .get(api_comments.show)
 

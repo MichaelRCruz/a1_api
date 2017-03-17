@@ -5,13 +5,28 @@ module.exports = {
   index: index,
   create: create,
   destroy: destroy,
-  show: show
+  show: show,
+  listReplies: listReplies
 };
 
 function show(req, res, next) {
   if (req.user) {
-    Comment.find({ "belongs_to": req.params.id, "replied_to": null })
+    Comment.find({ "belongs_to": req.params.id, "is_reply": false })
     .populate('created_by')
+    .exec(function(err, comments) {
+      if (err) console.log(err);
+      res.json(comments);
+    });
+  } else {
+    res.send(403);
+  }
+};
+
+function listReplies(req, res, next) {
+  if (req.user) {
+    Comment.find({ "belongs_to": req.params.id, "is_reply": true })
+    .populate('created_by')
+    .populate('replied_to')
     .exec(function(err, comments) {
       if (err) console.log(err);
       res.json(comments);
@@ -37,6 +52,7 @@ function create(req, res, next) {
     var newComment = {
       content: req.body.content,
       belongs_to: req.body.belongs_to,
+      is_reply: false,
       created_by: req.user._id,
       replied_to: null
     }
@@ -55,6 +71,7 @@ function create(req, res, next) {
       var newComment = {
         content: req.body.content,
         belongs_to: req.body.belongs_to,
+        is_reply: true,
         created_by: req.user._id,
         replied_to: req.body.replied_to
       }
