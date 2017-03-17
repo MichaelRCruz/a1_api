@@ -33,20 +33,43 @@ function index(req, res, next) {
 };
 
 function create(req, res, next) {
-  var newComment = {
-    content: req.body.content,
-    created_by: req.user._id,
-    belongs_to: req.body.belongs_to
-  }
-  Comment.create(newComment, function(err, comment) {
-    if (err) res.send(err);
-    Comment.findOne({ "_id": comment._id })
-    .populate('created_by')
-    .exec(function(err, comment) {
-      if (err) console.log(err);
-      res.json(comment);
-    });
-  })
+  if (req.body.belongs_to != "") {
+    var newComment = {
+      content: req.body.content,
+      belongs_to: req.body.belongs_to,
+      created_by: req.user._id,
+      replied_to: null
+    }
+    Comment.create(newComment, function(err, comment) {
+      if (err) res.send(err);
+      Comment.findOne({ "_id": comment._id })
+      .populate('created_by')
+      .exec(function(err, comment) {
+        if (err) console.log(err);
+        res.json(comment);
+      });
+      console.log('regular comment JKJKJKJKJKJKJK', comment)
+    })
+  } else {
+    console.log('req.body XOXOXOXOXOXOXOXOXOXOXOXOXO', req.body);
+      var newComment = {
+        content: req.body.content,
+        belongs_to: "",
+        created_by: req.user._id,
+        replied_to: req.body.replied_to
+      }
+      console.log('newComment XOXOXOXOXOXOXOXOXOXOXOXOXO', newComment);
+      Comment.create(newComment, function(err, comment) {
+        if (err) res.send(err);
+        Comment.findOne({ "_id": comment._id })
+        .populate('replied_to')
+        .exec(function(err, comment) {
+          if (err) console.log(err);
+          res.json(comment);
+        });
+        console.log('cross your fingers OPOPOPOPOPOPOPOPOPOPOP', comment)
+      })
+    };
 };
 
 function destroy(req, res, next) {

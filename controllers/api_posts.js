@@ -63,6 +63,7 @@ function create(req, res, next) {
       if (err) console.log(err);
       res.json(post);
     });
+    console.log(post)
   })
 };
 
