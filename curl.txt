@@ -1,4 +1,0 @@
-curl -H "Content-Type: application/json" -X POST -d '{name: "Dude McFriend", phone: "(555) 555-5555", email: "dude@mcfriend.com", employer: "employer", github: "github", linkedin: "linkedin", facebook: "facebook", projects: {}
-}' http://localhost:3000/api/peoples
-
-curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "{"name": "Dude McFriend", "phone": "555-555-5555", "email": "dude@mcfriend.com", "employer": "employer", "github": "github", "linkedin": "linkedin", "facebook": "facebook", "projects": {}}" http://localhost:3000/api/peoples
