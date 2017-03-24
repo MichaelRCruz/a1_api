@@ -19,7 +19,7 @@ require('./config/database');
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -48,7 +48,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-app.use(cors({origin: 'http://localhost:8080'}));
+app.use(cors({origin: process.env.FRONTEND_URL}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -62,14 +62,14 @@ app.get('/auth/github', passport.authenticate(
 app.get('/oauth2callback', passport.authenticate(
   'github',
   {
-    successRedirect: 'http://localhost:8080/dashboard',
+    successRedirect: process.env.FRONTEND_URL + '/dashboard',
     failureRedirect: '/'
   }
 ));
 
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('http://localhost:8080/');
+  res.redirect(process.env.FRONTEND_URL + '/');
 });
 
 app.use('/', index);

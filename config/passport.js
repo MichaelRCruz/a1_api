@@ -8,7 +8,7 @@ dotenv.load();
 passport.use(new GithubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_SECRET,
-  callbackURL: 'http://localhost:3000/oauth2callback'
+  callbackURL: process.env.BACKEND_URL + 'oauth2callback'
 }, function(accessToken, refreshToken, profile, cb){
     User.findOne({ 'github_id': profile.id.toString() }, function(err, user) {
       if (err) return cb(err);
